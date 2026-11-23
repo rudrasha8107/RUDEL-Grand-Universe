@@ -1,0 +1,11 @@
+RUDEL ANDROID BUILD FILES
+
+Upload the CONTENTS of this ZIP to the ROOT of your existing GitHub repository, preserving folders:
+android-native/...
+.github/workflows/android-build.yml
+
+Do NOT upload the ZIP itself and do NOT put everything into a single flat directory.
+
+GitHub -> Actions -> Android APK Build -> Run workflow (if manual trigger is enabled).
+Inspect logs and download the artifact only if build succeeds.
+This is an unverified Android project, not a production-ready APK.
