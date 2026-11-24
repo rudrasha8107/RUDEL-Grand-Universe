@@ -57,6 +57,26 @@ public final class MainActivity extends Activity {
             web.setWebViewClient(new WebViewClient() {
                 @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                     Uri uri=request.getUrl();
+if ("rudel".equals(uri.getScheme())) {
+    String page = uri.getHost();
+    if ("account".equals(page)) {
+        startActivity(new Intent(MainActivity.this, AccountActivity.class));
+    } else if ("connect".equals(page)) {
+        startActivity(new Intent(MainActivity.this, ConnectActivity.class));
+    } else if ("ai".equals(page)) {
+        startActivity(new Intent(MainActivity.this, RudraAIActivity.class));
+    } else if ("alarm".equals(page)) {
+        try {
+            Intent alarm = new Intent(android.provider.AlarmClock.ACTION_SHOW_ALARMS);
+            startActivity(alarm);
+        } catch (Exception e) {
+            android.widget.Toast.makeText(MainActivity.this,
+                "Clock app unavailable", 0).show();
+        }
+    }
+    return true;
+}
+
                     if ("file".equals(uri.getScheme()) && "/android_asset/rudra.html".equals(uri.getPath())) { startActivity(new Intent(MainActivity.this,RudraAIActivity.class)); return true; }
                     if ("file".equals(uri.getScheme()) && uri.getPath()!=null && uri.getPath().startsWith("/android_asset/")) return false;
                     if ("https".equals(uri.getScheme()) || "http".equals(uri.getScheme())) {
@@ -96,39 +116,7 @@ public final class MainActivity extends Activity {
                     }
                 }
             });
-            LinearLayout shell = new LinearLayout(this);
-            shell.setOrientation(LinearLayout.VERTICAL);
-            Button account = new Button(this);
-            account.setText("RUDEL · Online account");
-            account.setOnClickListener(v -> startActivity(new Intent(this, AccountActivity.class)));
-            
-    // RUDEL43_HEADER
-    shell.setBackgroundColor(Color.rgb(7,12,24));
-    account.setText("RUDEL  |  My Account");
-    account.setAllCaps(false);
-    account.setTextSize(16);
-    account.setTextColor(Color.WHITE);
-    android.graphics.drawable.GradientDrawable bg =
-        new android.graphics.drawable.GradientDrawable(
-        android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT,
-        new int[]{0xff172b49,0xff44378a});
-    bg.setCornerRadius(28f);
-    account.setBackground(bg);
-    LinearLayout.LayoutParams header =
-        new LinearLayout.LayoutParams(-1, -2);
-    header.setMargins(16,12,16,12);
-    shell.addView(account,header);
-    LinearLayout nav = new LinearLayout(this);
-    for (String label : new String[]{"Home", "Connect", "Rudra AI"}) {
-        Button tab = new Button(this); tab.setText(label); tab.setAllCaps(false);
-        tab.setTextColor(Color.WHITE); tab.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xff202b45));
-        nav.addView(tab,new LinearLayout.LayoutParams(0,-2,1));
-        tab.setOnClickListener(v->{ if(label.equals("Home")) web.loadUrl(ENTRY); else startActivity(new Intent(this,label.equals("Connect")?ConnectActivity.class:RudraAIActivity.class)); });
-    }
-    shell.addView(nav);
-
-            shell.addView(web, new LinearLayout.LayoutParams(-1, 0, 1));
-            setContentView(shell);
+            setContentView(web);
             web.loadUrl(ENTRY);
         } catch(Throwable ex) {
             Log.e("RUDEL","WebView startup failure",ex);
