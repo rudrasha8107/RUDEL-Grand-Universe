@@ -89,7 +89,14 @@ public final class MainActivity extends Activity {
                     }
                 }
             });
-            setContentView(web);
+            LinearLayout shell = new LinearLayout(this);
+            shell.setOrientation(LinearLayout.VERTICAL);
+            Button account = new Button(this);
+            account.setText("RUDEL · Online account");
+            account.setOnClickListener(v -> startActivity(new Intent(this, AccountActivity.class)));
+            shell.addView(account);
+            shell.addView(web, new LinearLayout.LayoutParams(-1, 0, 1));
+            setContentView(shell);
             web.loadUrl(ENTRY);
         } catch(Throwable ex) {
             Log.e("RUDEL","WebView startup failure",ex);
