@@ -6,7 +6,7 @@ android {
         applicationId 'com.rudel.grand'
         minSdk 29
         targetSdk 35
-        versionCode 6
+        versionCode 42
         versionName '4.2'
     }
     buildTypes { release { minifyEnabled false } }

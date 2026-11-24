@@ -150,6 +150,15 @@ public final class MainActivity extends Activity {
         else super.onBackPressed();
     }
 
+
+    @Override protected void onResume() {
+        super.onResume();
+        if (com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser() == null) {
+            startActivity(new Intent(this, AccountActivity.class));
+            finish();
+        }
+    }
+
     @Override protected void onDestroy() {
         if(pendingFile!=null) {pendingFile.onReceiveValue(null);pendingFile=null;}
         if(pendingAudio!=null) {pendingAudio.deny();pendingAudio=null;}

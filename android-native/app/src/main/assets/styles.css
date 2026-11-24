@@ -75,3 +75,22 @@ html.reduce-motion .nova-orbit,html.reduce-motion .nova-center{animation:none!im
 
 /* Compact mobile layout */
 @media(max-width:600px){.stage-body{display:flex!important;flex-direction:column!important;align-items:stretch!important}.stage-left,.stage-right{width:100%!important;min-width:0!important}.stage-left h1{font-size:clamp(1.65rem,7vw,2.5rem)!important;white-space:normal!important;overflow-wrap:anywhere}.stage-right{position:relative!important;inset:auto!important;height:180px!important}.stage-buttons{flex-wrap:wrap!important}.grid>* , .feature-grid>*{min-width:0!important;overflow-wrap:anywhere}.page{padding-bottom:130px!important}.card input,.card select,.card textarea{max-width:100%;min-width:0}.bottomnav{gap:2px!important}.navbtn{min-width:0!important;font-size:.7rem!important}.home-stage{overflow:hidden}.stage-head{flex-wrap:wrap}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+/* RUDEL42_THEME */
+body {
+ background: #080f20;
+ color: #f1f5ff;
+}
+button {
+ border-radius: 14px;
+ transition: transform .18s ease, opacity .18s ease;
+}
+button:active {
+ transform: scale(.96);
+}
+input, textarea, select {
+ border-radius: 12px;
+}
+@media (prefers-reduced-motion: reduce) {
+ * { animation: none !important; transition: none !important; }
+}

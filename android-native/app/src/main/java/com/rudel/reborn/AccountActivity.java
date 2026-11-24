@@ -14,9 +14,15 @@ public class AccountActivity extends Activity {
  private int dp(int n){return (int)(n*getResources().getDisplayMetrics().density);}
  private void text(String s,int size){TextView t=new TextView(this);t.setText(s);t.setTextColor(Color.WHITE);t.setTextSize(size);panel.addView(t);}
  private EditText field(String hint,int type){EditText e=new EditText(this);e.setHint(hint);e.setSingleLine(true);e.setInputType(type);e.setTextColor(Color.WHITE);e.setHintTextColor(0xffa6b8ca);panel.addView(e);return e;}
- private void button(String title,Runnable run){Button b=new Button(this);b.setText(title);b.setAllCaps(false);b.setOnClickListener(v->{if(!busy)run.run();});panel.addView(b);}
+ private void button(String title,Runnable run){Button b=new Button(this);b.setText(title);b.setAllCaps(false);b.setOnClickListener(v->{if(!busy)run.run();});
+b.setTextColor(Color.WHITE);
+b.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xff4659d9));
+LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(-1, dp(52));
+lp.setMargins(0,dp(8),0,dp(4));
+panel.addView(b,lp);
+}
  private void msg(String s){status.setText(s);}
- private void show(){busy=false; ScrollView scroll=new ScrollView(this);panel=new LinearLayout(this);panel.setOrientation(1);panel.setPadding(dp(24),dp(28),dp(24),dp(24));panel.setBackgroundColor(0xff101c2d);scroll.setFillViewport(true);scroll.addView(panel);setContentView(scroll);text("RUDEL / Online",30);text("Your private account",16);status=new TextView(this);status.setTextColor(0xff80e5da);panel.addView(status);
+ private void show(){busy=false; ScrollView scroll=new ScrollView(this);panel=new LinearLayout(this);panel.setOrientation(1);panel.setPadding(dp(24),dp(28),dp(24),dp(24));panel.setBackgroundColor(0xff080f20);scroll.setFillViewport(true);scroll.addView(panel);setContentView(scroll);text("RUDEL GRAND UNIVERSE",30);text("Your world. Your identity.",16);status=new TextView(this);status.setTextColor(0xff80e5da);panel.addView(status);
  FirebaseUser u=auth.getCurrentUser(); if(u==null){EditText email=field("Email",33),pass=field("Password (6+ characters)",129);
  button("Sign in",()->{if(email.length()==0||pass.length()==0){msg("Enter email and password.");return;}busy=true;auth.signInWithEmailAndPassword(email.getText().toString().trim(),pass.getText().toString()).addOnCompleteListener(t->{busy=false;if(t.isSuccessful())show();else msg("Sign in failed. Check credentials and connection.");});});
  button("Create account",()->{if(email.length()==0||pass.length()<6){msg("Enter email and at least 6 password characters.");return;}busy=true;auth.createUserWithEmailAndPassword(email.getText().toString().trim(),pass.getText().toString()).addOnCompleteListener(t->{busy=false;if(t.isSuccessful())show();else msg("Could not create account. Check email and password.");});});
