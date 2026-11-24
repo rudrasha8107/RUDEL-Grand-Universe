@@ -1,5 +1,14 @@
 plugins { id 'com.android.application'; id 'com.google.gms.google-services' }
 android {
+    signingConfigs {
+        debug {
+            storeFile file(System.getProperty("user.home") + "/.android/debug.keystore")
+            storePassword System.getenv("RUDEL_KEY_PASSWORD") ?: "android"
+            keyAlias "androiddebugkey"
+            keyPassword System.getenv("RUDEL_KEY_PASSWORD") ?: "android"
+        }
+    }
+
     namespace 'com.rudel.reborn'
     compileSdk 35
     defaultConfig {

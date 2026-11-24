@@ -29,7 +29,16 @@ jobs:
         with:
           gradle-version: '8.9'
 
+      - name: Restore permanent signing
+        env:
+          KEYSTORE: ${{ secrets.RUDEL_KEYSTORE }}
+        run: |
+          mkdir -p "$HOME/.android"
+          printf '%s' "$KEYSTORE" | base64 -d > "$HOME/.android/debug.keystore"
+
       - name: Build debug APK
+        env:
+          RUDEL_KEY_PASSWORD: ${{ secrets.RUDEL_KEY_PASSWORD }}
         working-directory: android-native
         run: gradle assembleDebug --no-daemon
 
