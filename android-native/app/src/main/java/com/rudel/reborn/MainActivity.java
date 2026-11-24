@@ -100,7 +100,24 @@ public final class MainActivity extends Activity {
             Button account = new Button(this);
             account.setText("RUDEL · Online account");
             account.setOnClickListener(v -> startActivity(new Intent(this, AccountActivity.class)));
-            shell.addView(account);
+            
+    // RUDEL43_HEADER
+    shell.setBackgroundColor(Color.rgb(7,12,24));
+    account.setText("RUDEL  |  My Account");
+    account.setAllCaps(false);
+    account.setTextSize(16);
+    account.setTextColor(Color.WHITE);
+    android.graphics.drawable.GradientDrawable bg =
+        new android.graphics.drawable.GradientDrawable(
+        android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT,
+        new int[]{0xff172b49,0xff44378a});
+    bg.setCornerRadius(28f);
+    account.setBackground(bg);
+    LinearLayout.LayoutParams header =
+        new LinearLayout.LayoutParams(-1, -2);
+    header.setMargins(16,12,16,12);
+    shell.addView(account,header);
+
             shell.addView(web, new LinearLayout.LayoutParams(-1, 0, 1));
             setContentView(shell);
             web.loadUrl(ENTRY);

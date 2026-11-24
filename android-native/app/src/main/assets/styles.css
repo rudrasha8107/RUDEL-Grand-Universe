@@ -94,3 +94,70 @@ input, textarea, select {
 @media (prefers-reduced-motion: reduce) {
  * { animation: none !important; transition: none !important; }
 }
+
+
+/* RUDEL43_PREMIUM */
+:root {
+ color-scheme: dark;
+}
+body {
+ background: radial-gradient(ellipse at top,
+ #202a50 0%, #0b1426 40%, #070c18 100%) !important;
+ color: #f4f6ff !important;
+ font-family: system-ui, sans-serif;
+}
+button {
+ border-radius: 18px !important;
+ transition: transform .18s ease, opacity .18s ease;
+}
+button:active {
+ transform: scale(.96);
+}
+.card, .panel {
+ border-radius: 22px !important;
+ border: 1px solid #ffffff18 !important;
+ box-shadow: 0 8px 24px #00000030;
+}
+input, textarea, select {
+ border-radius: 14px !important;
+}
+@keyframes rudelEnter {
+ from {opacity:0; transform:translateY(8px);}
+ to {opacity:1; transform:translateY(0);}
+}
+main {
+ animation: rudelEnter .35s ease-out;
+}
+@media (prefers-reduced-motion:reduce) {
+ * {animation:none !important;transition:none !important;}
+}
+
+/* RUDEL43_MOTION */
+@keyframes rudelReveal {
+ from {opacity:0;transform:translateY(12px);}
+ to {opacity:1;transform:translateY(0);}
+}
+.card, .panel {
+ animation:rudelReveal .3s ease-out;
+}
+button, a, input {
+ -webkit-tap-highlight-color:transparent;
+}
+button:active {
+ opacity:.85;
+ transform:scale(.97);
+}
+::-webkit-scrollbar {
+ width:3px;
+}
+::-webkit-scrollbar-thumb {
+ background:#526a91;
+ border-radius:10px;
+}
+::selection {
+ background:#6454b8;
+ color:white;
+}
+@media(prefers-reduced-motion:reduce){
+ *{animation:none!important;transition:none!important;}
+}

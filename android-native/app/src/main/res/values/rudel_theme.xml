@@ -1,0 +1,11 @@
+
+<resources>
+<style name="RudelPremiumTheme"
+ parent="android:style/Theme.Material.NoActionBar">
+ <item name="android:windowBackground">#070C18</item>
+ <item name="android:statusBarColor">#070C18</item>
+ <item name="android:navigationBarColor">#070C18</item>
+ <item name="android:colorAccent">#65E6DA</item>
+ <item name="android:windowLightStatusBar">false</item>
+</style>
+</resources>

@@ -6,8 +6,8 @@ android {
         applicationId 'com.rudel.grand'
         minSdk 29
         targetSdk 35
-        versionCode 42
-        versionName '4.2'
+        versionCode 43
+        versionName '4.3'
     }
     buildTypes { release { minifyEnabled false } }
     compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
