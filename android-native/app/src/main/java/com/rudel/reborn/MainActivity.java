@@ -32,6 +32,12 @@ public final class MainActivity extends Activity {
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser() == null) {
+            startActivity(new Intent(this, AccountActivity.class));
+            finish();
+            return;
+        }
+
         getWindow().setStatusBarColor(Color.rgb(9,17,29));
         getWindow().setNavigationBarColor(Color.rgb(9,17,29));
         try {

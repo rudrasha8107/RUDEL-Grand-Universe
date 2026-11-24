@@ -24,5 +24,10 @@ public class AccountActivity extends Activity {
  }else{text(u.getEmail(),17);text(u.isEmailVerified()?"Email verified":"Email not verified",14);button("Send verification email",()->u.sendEmailVerification().addOnCompleteListener(t->msg(t.isSuccessful()?"Check your inbox.":"Could not send email.")));button("Refresh verification",()->u.reload().addOnCompleteListener(t->{if(t.isSuccessful())show();else msg("Could not refresh.");}));
  EditText name=field("Display name",1); DocumentReference doc=FirebaseFirestore.getInstance().collection("users").document(u.getUid());doc.get().addOnSuccessListener(d->{String n=d.getString("displayName");if(n!=null&&name.length()==0)name.setText(n);});
  button("Save private profile",()->{String n=name.getText().toString().trim();if(n.isEmpty()||n.length()>60){msg("Enter a name of 1–60 characters.");return;}HashMap<String,Object> data=new HashMap<>();data.put("displayName",n);busy=true;doc.set(data,SetOptions.merge()).addOnCompleteListener(t->{busy=false;msg(t.isSuccessful()?"Profile saved online.":"Profile not saved. Check rules and connection.");});});button("Sign out",()->{auth.signOut();show();});}
- button("Back to RUDEL",()->finish());}
+ if(auth.getCurrentUser()!=null){
+        button("Enter RUDEL",()->{
+            startActivity(new android.content.Intent(this,MainActivity.class));
+            finish();
+        });
+    }}
 }
