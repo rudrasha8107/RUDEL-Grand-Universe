@@ -3,6 +3,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <application android:allowBackup="false" android:label="RUDEL" android:icon="@drawable/rudel_icon" android:theme="@style/RudelPremiumTheme" android:usesCleartextTraffic="false" android:supportsRtl="true" android:roundIcon="@drawable/rudel_icon">
+        <activity android:name=".SocialActivity" android:exported="false" />
         <activity android:name="com.rudel.reborn.AccountActivity" android:exported="false" />
         <activity android:name=".MainActivity" android:exported="true" android:configChanges="orientation|screenSize|keyboardHidden" android:windowSoftInputMode="adjustResize">
             <intent-filter>

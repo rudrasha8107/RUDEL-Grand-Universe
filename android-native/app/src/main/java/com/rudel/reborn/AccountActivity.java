@@ -32,6 +32,7 @@ panel.addView(b,lp);
  button("Save private profile",()->{String n=name.getText().toString().trim();if(n.isEmpty()||n.length()>60){msg("Enter a name of 1–60 characters.");return;}HashMap<String,Object> data=new HashMap<>();data.put("displayName",n);busy=true;doc.set(data,SetOptions.merge()).addOnCompleteListener(t->{busy=false;msg(t.isSuccessful()?"Profile saved online.":"Profile not saved. Check rules and connection.");});});EditText cloudNote=field("Private cloud note",1);doc.get().addOnSuccessListener(d->{String n=d.getString("privateNote");if(n!=null&&cloudNote.length()==0)cloudNote.setText(n);});
  button("Save cloud note",()->{String n=cloudNote.getText().toString();if(n.length()>2000){msg("Maximum 2000 characters.");return;}busy=true;HashMap<String,Object> data=new HashMap<>();data.put("privateNote",n);doc.set(data,SetOptions.merge()).addOnCompleteListener(t->{busy=false;msg(t.isSuccessful()?"Private note saved online.":"Could not save note.");});});
  button("Reload cloud note",()->doc.get(Source.SERVER).addOnCompleteListener(t->{if(t.isSuccessful()){String n=t.getResult().getString("privateNote");cloudNote.setText(n==null?"":n);msg("Note loaded from server.");}else msg("Unable to reach server.");}));
+ button("Online community",()->startActivity(new android.content.Intent(this,SocialActivity.class)));
  button("Sign out",()->{auth.signOut();show();});}
  if(auth.getCurrentUser()!=null){
         button("Enter RUDEL",()->{
