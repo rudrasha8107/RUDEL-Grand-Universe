@@ -6,16 +6,19 @@ android {
         applicationId 'com.rudel.grand'
         minSdk 29
         targetSdk 35
-        versionCode 44
-        versionName '4.4'
+        versionCode 50
+        versionName '5.0'
     }
     buildTypes { release { minifyEnabled false } }
     compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
 }
 
 dependencies {
+    debugImplementation 'com.google.firebase:firebase-appcheck-debug'
+
     implementation platform('com.google.firebase:firebase-bom:34.6.0')
     implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-ai'
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.firebase:firebase-storage'
     implementation 'com.google.firebase:firebase-messaging'

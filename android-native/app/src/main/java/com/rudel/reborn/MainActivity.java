@@ -57,6 +57,7 @@ public final class MainActivity extends Activity {
             web.setWebViewClient(new WebViewClient() {
                 @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                     Uri uri=request.getUrl();
+                    if ("file".equals(uri.getScheme()) && "/android_asset/rudra.html".equals(uri.getPath())) { startActivity(new Intent(MainActivity.this,RudraAIActivity.class)); return true; }
                     if ("file".equals(uri.getScheme()) && uri.getPath()!=null && uri.getPath().startsWith("/android_asset/")) return false;
                     if ("https".equals(uri.getScheme()) || "http".equals(uri.getScheme())) {
                         try { startActivity(new Intent(Intent.ACTION_VIEW,uri)); } catch(Exception ex) { Log.w("RUDEL","Link not opened",ex); }
@@ -117,6 +118,14 @@ public final class MainActivity extends Activity {
         new LinearLayout.LayoutParams(-1, -2);
     header.setMargins(16,12,16,12);
     shell.addView(account,header);
+    LinearLayout nav = new LinearLayout(this);
+    for (String label : new String[]{"Home", "Connect", "Rudra AI"}) {
+        Button tab = new Button(this); tab.setText(label); tab.setAllCaps(false);
+        tab.setTextColor(Color.WHITE); tab.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xff202b45));
+        nav.addView(tab,new LinearLayout.LayoutParams(0,-2,1));
+        tab.setOnClickListener(v->{ if(label.equals("Home")) web.loadUrl(ENTRY); else startActivity(new Intent(this,label.equals("Connect")?ConnectActivity.class:RudraAIActivity.class)); });
+    }
+    shell.addView(nav);
 
             shell.addView(web, new LinearLayout.LayoutParams(-1, 0, 1));
             setContentView(shell);
